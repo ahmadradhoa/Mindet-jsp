@@ -23,7 +23,17 @@ public class DB {
         if (customPath != null && !customPath.isEmpty()) {
             dbPath = customPath;
         } else {
-            dbPath = new File("mindet.sqlite").getAbsolutePath();
+            String envPath = System.getenv("MINDET_DB_PATH");
+            if (envPath != null && !envPath.trim().isEmpty()) {
+                dbPath = envPath.trim();
+            } else {
+                String propPath = System.getProperty("mindet.db.path");
+                if (propPath != null && !propPath.trim().isEmpty()) {
+                    dbPath = propPath.trim();
+                } else {
+                    dbPath = new File("mindet.sqlite").getAbsolutePath();
+                }
+            }
         }
         initializeSchema();
     }
