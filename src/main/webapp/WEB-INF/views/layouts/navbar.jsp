@@ -6,6 +6,7 @@
     <a class="navbar-brand d-flex align-items-center gap-2" href="${pageContext.request.contextPath}/posts">
         <img src="${pageContext.request.contextPath}/image/Mindet_Logo.png" alt="Mindet Logo" height="35" class="d-inline-block align-text-top">
         <span class="fw-bold">Mindet</span>
+        <span class="badge bg-primary text-white" style="font-size: 0.7rem; font-weight: 600; padding: 0.35em 0.65em; border-radius: 6px;">JSP Edition</span>
     </a>
     
     <div class="d-flex gap-2 align-items-center">

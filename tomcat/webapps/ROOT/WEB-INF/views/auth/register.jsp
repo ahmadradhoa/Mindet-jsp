@@ -7,15 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register - Mindet</title>
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/image/Mindet_Logo.png">
+
+    <script>
+        (function () {
+            var t = 'light';
+            try { t = localStorage.getItem('theme') || 'light'; } catch (e) {}
+            document.documentElement.setAttribute('data-theme', t);
+            document.documentElement.setAttribute('data-bs-theme', t);
+        })();
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    
+
     <style>
         :root {
             --bg-color: #f3f4f6;
             --card-bg: #ffffff;
             --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e2e8f0;
+            --input-bg: #ffffff;
+            --input-border: #cbd5e1;
+            --link-color: #4f46e5;
             --primary-color: #6366f1;
             --primary-hover: #4f46e5;
         }
@@ -23,7 +38,13 @@
             --bg-color: #0f172a;
             --card-bg: #1e293b;
             --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --input-bg: #334155;
+            --input-border: #475569;
+            --link-color: #a5b4fc;
         }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
@@ -34,6 +55,7 @@
             justify-content: center;
             transition: background-color 0.3s, color 0.3s;
         }
+
         .theme-toggle-btn {
             position: fixed;
             top: 20px;
@@ -42,7 +64,7 @@
             height: 44px;
             border-radius: 50%;
             background-color: var(--card-bg);
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--border-color);
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -52,11 +74,7 @@
             transition: all 0.3s ease;
             z-index: 1000;
         }
-        [data-theme="dark"] .theme-toggle-btn {
-            background-color: #1e293b;
-            border-color: #334155;
-            color: #f1f5f9;
-        }
+
         .auth-card {
             background-color: var(--card-bg);
             width: 100%;
@@ -64,25 +82,28 @@
             padding: 2rem;
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             transition: background-color 0.3s, border-color 0.3s;
         }
         [data-theme="dark"] .auth-card {
-            border-color: #334155;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
         }
+
         .form-control {
             border-radius: 10px;
             padding: 0.75rem 1rem;
-            background-color: var(--card-bg);
+            background-color: var(--input-bg);
             color: var(--text-main);
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--input-border);
         }
-        [data-theme="dark"] .form-control {
-            background-color: #334155;
-            border-color: #475569;
-            color: #f1f5f9;
+        .form-control::placeholder { color: var(--text-muted); opacity: 0.7; }
+        .form-control:focus {
+            background-color: var(--input-bg);
+            color: var(--text-main);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
         }
+
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
@@ -94,6 +115,11 @@
             background-color: var(--primary-hover);
             border-color: var(--primary-hover);
         }
+
+        .text-muted { color: var(--text-muted) !important; }
+        .auth-card .border-top { border-color: var(--border-color) !important; }
+        .auth-card a.text-primary,
+        .auth-card a.text-primary:hover { color: var(--link-color) !important; }
     </style>
 </head>
 <body>
@@ -142,7 +168,7 @@
 
             <div class="text-center pt-3 border-top">
                 <p class="text-muted small mb-0">
-                    Already registered? 
+                    Already registered?
                     <a href="${pageContext.request.contextPath}/login" class="fw-semibold text-primary text-decoration-none">
                         Login
                     </a>
@@ -154,12 +180,16 @@
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
+
         function applyTheme(t) {
             document.documentElement.setAttribute('data-theme', t);
-            localStorage.setItem('theme', t);
+            document.documentElement.setAttribute('data-bs-theme', t);
+            try { localStorage.setItem('theme', t); } catch (e) {}
             themeIcon.className = t === 'light' ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill';
         }
-        applyTheme(localStorage.getItem('theme') || 'light');
+
+        applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
+
         themeToggle.addEventListener('click', () => {
             const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
             applyTheme(next);

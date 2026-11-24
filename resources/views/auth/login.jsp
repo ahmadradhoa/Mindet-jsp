@@ -16,6 +16,9 @@
             --bg-color: #f3f4f6;
             --card-bg: #ffffff;
             --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-color: #e2e8f0;
+            --link-color: #4f46e5;
             --primary-color: #6366f1;
             --primary-hover: #4f46e5;
         }
@@ -23,7 +26,11 @@
             --bg-color: #0f172a;
             --card-bg: #1e293b;
             --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --link-color: #a5b4fc;
         }
+        
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
@@ -64,7 +71,7 @@
             padding: 2rem;
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             transition: background-color 0.3s, border-color 0.3s;
         }
         [data-theme="dark"] .auth-card {
@@ -93,6 +100,32 @@
         .btn-primary:hover {
             background-color: var(--primary-hover);
             border-color: var(--primary-hover);
+        }
+        .text-muted { color: var(--text-muted) !important; }
+
+        .auth-card .border-top { border-color: var(--border-color) !important; }
+
+        .auth-card a.text-primary,
+        .auth-card a.text-primary:hover { color: var(--link-color) !important; }
+
+        .form-control::placeholder { color: var(--text-muted); opacity: 0.7; }
+
+        .form-control:focus {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+        }
+
+        [data-theme="dark"] .form-control:focus { background-color: #334155; }
+
+        [data-theme="dark"] .form-check-input {
+            background-color: #334155;
+            border-color: #64748b;
+        }
+        [data-theme="dark"] .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
         }
     </style>
 </head>

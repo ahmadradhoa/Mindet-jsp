@@ -4,7 +4,7 @@
 </div> <!-- End of container -->
 
 <footer class="text-center text-muted small py-5 mt-5">
-    <p class="mb-0">© 2026 <strong>Mindet</strong></p>
+    <p class="mb-0">© 2026 <strong>Mindet (Jakarta Server Pages / Tomcat 10)</strong></p>
 </footer>
 
 <nav class="bottom-nav d-md-none">
