@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>Mindet</title>
+        <link rel="icon" type="image/png" href="{{ asset('image/Mindet_Logo.png') }}">
+
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+        <style>
+            :root {
+                --bg-color: #f3f4f6;
+                --card-bg: #ffffff;
+                --text-main: #111827;
+            }
+            
+            [data-theme="dark"] {
+                --bg-color: #0f172a;
+                --card-bg: #1e293b;
+                --text-main: #f1f5f9;
+            }
+            
+            body {
+                background-color: var(--bg-color) !important;
+                color: var(--text-main) !important;
+                transition: background-color 0.3s, color 0.3s;
+            }
+            
+            .auth-card-bg {
+                background-color: var(--card-bg) !important;
+                transition: background-color 0.3s;
+            }
+            
+            .theme-toggle-btn {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background-color: var(--card-bg);
+                border: 1px solid #e5e7eb;
+                color: var(--text-main);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                z-index: 1000;
+            }
+            
+            .theme-toggle-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+            }
+            
+            [data-theme="dark"] .theme-toggle-btn {
+                background-color: #1e293b;
+                border-color: #334155;
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] input, 
+            [data-theme="dark"] label {
+                color: var(--text-main);
+            }
+
+            [data-theme="dark"] input {
+                background-color: #334155;
+                border-color: #475569;
+            }
+
+            [data-theme="dark"] .text-gray-500,
+            [data-theme="dark"] .text-gray-600,
+            [data-theme="dark"] .text-gray-400,
+            [data-theme="dark"] .text-gray-700 {
+                color: #cbd5e1 !important;
+            }
+
+            [data-theme="dark"] label,
+            [data-theme="dark"] .form-label {
+                color: #f1f5f9 !important;
+            }
+
+            [data-theme="dark"] a {
+                color: #6366f1 !important;
+            }
+
+            [data-theme="dark"] a:hover {
+                color: #a5b4fc !important;
+            }
+
+            [data-theme="dark"] a[href*="register"]:hover {
+                color: #4f46e5 !important;
+            }
+
+            [data-theme="dark"] .form-check-label {
+                color: #cbd5e1 !important;
+            }
+
+            [data-theme="dark"] hr {
+                border-color: #334155 !important;
+            }
+
+            [data-theme="dark"] input::placeholder {
+                color: #64748b !important;
+            }
+
+            @media (max-width: 640px) {
+                body {
+                    padding: 10px !important;
+                }
+                
+                .w-full.sm\:max-w-md {
+                    border-radius: 16px !important;
+                    padding: 20px !important;
+                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2) !important;
+                    margin-top: 20px !important;
+                }
+
+                .theme-toggle-btn {
+                    top: 15px;
+                    right: 15px;
+                    width: 38px;
+                    height: 38px;
+                }
+                .theme-toggle-btn svg {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                .min-h-screen > div:first-child img {
+                    width: 100px !important;
+                }
+                .min-h-screen > div:first-child h4 {
+                    font-size: 1.3rem !important;
+                }
+
+                .flex.items-center.justify-end.mt-4 {
+                    flex-direction: column; 
+                    align-items: stretch !important;
+                    gap: 10px;
+                }
+                .flex.items-center.justify-end.mt-4 button[type="submit"] {
+                    width: 100%; 
+                    justify-content: center;
+                    padding: 10px !important;
+                }
+                .flex.items-center.justify-end.mt-4 a {
+                    text-align: center;
+                    margin-top: 5px;
+                }
+            }
+        </style>
+    </head>
+    
+    <body class="font-sans antialiased">
+        
+        <button id="theme-toggle" class="theme-toggle-btn" title="Switch Dark/Light Mode">
+            <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+        </button>
+        
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+            <div>
+                <a href="/">
+                    <img src="{{ asset('image/Mindet_Logo.png') }}" alt="Logo App" style="width: 150px; height: 150px; object-fit: contain;">
+                </a>
+            </div>
+
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 shadow-md overflow-hidden sm:rounded-lg auth-card-bg">
+                {{ $slot }}
+            </div>
+        </div>
+        
+        <script>
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>`;
+            const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`;
+            
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            themeIcon.innerHTML = currentTheme === 'light' ? moonIcon : sunIcon;
+            
+            themeToggle.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                themeIcon.innerHTML = newTheme === 'light' ? moonIcon : sunIcon;
+            });
+        </script>
+    </body>
+</html>
