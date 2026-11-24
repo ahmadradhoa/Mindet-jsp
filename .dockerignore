@@ -1,0 +1,4 @@
+tomcat/
+.git/
+*.log
+*.sqlite
