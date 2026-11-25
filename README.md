@@ -67,28 +67,4 @@ Mindet-main/
 
 ---
 
-## 🏃 Cara Menjalankan
 
-### Cara Cepat (Windows):
-Cukup jalankan script batch di root folder:
-```cmd
-run.bat
-```
-Server akan aktif di:
-👉 **http://localhost:8080/**
-
-Untuk menghentikan:
-```cmd
-stop.bat
-```
-atau tekan `Ctrl + C` di jendela terminal yang menjalankan `run.bat`.
-
----
-
-## 🔑 Akun Demo Bawaan
-
-Database telah dilengkapi data awal (seeder) otomatis:
-- **Email**: `demo@mail.com`
-- **Password**: `password`
-- **Username**: `Demo User`
-Atau Anda dapat langsung menekan tombol **Register** untuk membuat akun baru.
